@@ -32,7 +32,7 @@ curl -A 'Mozilla/5.0 (X11; Linux x86_64; rv:30.0) Gecko/20100101 Firefox/30.0' -
 echo "Getting custom block list"
 curl -s https://raw.githubusercontent.com/MartinIngesen/blocklistbuilder/master/customblocklist.txt | sort >> $tempoutlist
 
-echo "writing temp file"
-cat $tempoutlist | sed $'s/\r$//' | sort -u | sed '/^$/d' | awk -v "IP=$destinationIP" '{sub(/\r$/,""); print "address=/"$0"/"IP}' > $outlist
+echo "writing adblock file"
+cat $tempoutlist | grep -v "ikea.com" | sed $'s/\r$//' | sort -u | sed '/^$/d' | awk -v "IP=$destinationIP" '{sub(/\r$/,""); print "address=/"$0"/"IP}' > $outlist
 
 
